@@ -1,5 +1,6 @@
 # HubSpot-nodejs oauth sample app
- 
+
+This is a sample app for the [hubspot-nodejs SDK](https://www.npmjs.com/package/@hubspot/api-client). 
 ### Setup App
 Make sure you have [Node](https://nodejs.org/) >=10.13.0 installed.
 
