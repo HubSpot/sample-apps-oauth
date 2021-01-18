@@ -1,4 +1,4 @@
-const { By, until } = require("selenium-webdriver");
+const { By, until } = require('selenium-webdriver');
 
 module.exports = async (driver, accountName) => {
   const accountLink = await driver.wait(

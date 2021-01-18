@@ -1,19 +1,19 @@
-const _ = require("lodash");
-const path = require("path");
-const express = require("express");
-const hubspot = require("@hubspot/api-client");
-const bodyParser = require("body-parser");
-require("./config");
+const _ = require('lodash');
+const path = require('path');
+const express = require('express');
+const hubspot = require('@hubspot/api-client');
+const bodyParser = require('body-parser');
+require('./config');
 
 const PORT = 3000;
 const OBJECTS_LIMIT = 30;
 const CLIENT_ID = process.env.HUBSPOT_CLIENT_ID;
 const CLIENT_SECRET = process.env.HUBSPOT_CLIENT_SECRET;
-const SCOPES = "contacts";
+const SCOPES = 'contacts';
 const REDIRECT_URI = `http://localhost:${PORT}/oauth-callback`;
 const GRANT_TYPES = {
-  AUTHORIZATION_CODE: "authorization_code",
-  REFRESH_TOKEN: "refresh_token",
+  AUTHORIZATION_CODE: 'authorization_code',
+  REFRESH_TOKEN: 'refresh_token',
 };
 
 let tokenStore = {};
@@ -23,15 +23,15 @@ const logResponse = (message, data) => {
 };
 
 const checkEnv = (req, res, next) => {
-  if (_.startsWith(req.url, "/error")) return next();
+  if (_.startsWith(req.url, '/error')) return next();
 
   if (_.isNil(CLIENT_ID))
     return res.redirect(
-      "/error?msg=Please set HUBSPOT_CLIENT_ID env variable to proceed"
+      '/error?msg=Please set HUBSPOT_CLIENT_ID env variable to proceed'
     );
   if (_.isNil(CLIENT_SECRET))
     return res.redirect(
-      "/error?msg=Please set HUBSPOT_CLIENT_SECRET env variable to proceed"
+      '/error?msg=Please set HUBSPOT_CLIENT_SECRET env variable to proceed'
     );
 
   next();
@@ -47,15 +47,15 @@ const isTokenExpired = () => {
 
 const prepareContactsContent = (contacts) => {
   return _.map(contacts, (contact) => {
-    const companyName = _.get(contact, "properties.company") || "";
+    const companyName = _.get(contact, 'properties.company') || '';
     const name = getFullName(contact.properties);
     return { id: contact.id, name, companyName };
   });
 };
 
 const getFullName = (contactProperties) => {
-  const firstName = _.get(contactProperties, "firstname") || "";
-  const lastName = _.get(contactProperties, "lastname") || "";
+  const firstName = _.get(contactProperties, 'firstname') || '';
+  const lastName = _.get(contactProperties, 'lastname') || '';
   return `${firstName} ${lastName}`;
 };
 
@@ -70,13 +70,13 @@ const refreshToken = async () => {
   );
   tokenStore = result.body;
   tokenStore.updatedAt = Date.now();
-  console.log("Updated tokens", tokenStore);
+  console.log('Updated tokens', tokenStore);
 
   hubspotClient.setAccessToken(tokenStore.accessToken);
 };
 
 const handleError = (e, res) => {
-  if (_.isEqual(e.message, "HTTP request failed")) {
+  if (_.isEqual(e.message, 'HTTP request failed')) {
     const errorMessage = JSON.stringify(e, null, 2);
     console.error(errorMessage);
     return res.redirect(`/error?msg=${errorMessage}`);
@@ -92,45 +92,45 @@ const app = express();
 
 const hubspotClient = new hubspot.Client();
 
-app.use(express.static(path.join(__dirname, "public")));
-app.set("view engine", "pug");
-app.set("views", path.join(__dirname, "views"));
+app.use(express.static(path.join(__dirname, 'public')));
+app.set('view engine', 'pug');
+app.set('views', path.join(__dirname, 'views'));
 
 app.use(
   bodyParser.urlencoded({
-    limit: "50mb",
+    limit: '50mb',
     extended: true,
   })
 );
 
 app.use(
   bodyParser.json({
-    limit: "50mb",
+    limit: '50mb',
     extended: true,
   })
 );
 
 app.use(checkEnv);
 
-app.get("/", async (req, res) => {
+app.get('/', async (req, res) => {
   try {
-    if (!isAuthorized()) return res.render("login");
+    if (!isAuthorized()) return res.render('login');
     if (isTokenExpired()) await refreshToken();
 
-    const properties = ["firstname", "lastname", "company"];
+    const properties = ['firstname', 'lastname', 'company'];
 
     // Get first contacts page
     // GET /crm/v3/objects/contacts
     // https://developers.hubspot.com/docs/api/crm/contacts
-    console.log("Calling crm.contacts.basicApi.getPage. Retrieve contacts.");
+    console.log('Calling crm.contacts.basicApi.getPage. Retrieve contacts.');
     const contactsResponse = await hubspotClient.crm.contacts.basicApi.getPage(
       OBJECTS_LIMIT,
       undefined,
       properties
     );
-    logResponse("Response from API", contactsResponse);
+    logResponse('Response from API', contactsResponse);
 
-    res.render("contacts", {
+    res.render('contacts', {
       tokenStore,
       contacts: prepareContactsContent(contactsResponse.body.results),
     });
@@ -139,27 +139,27 @@ app.get("/", async (req, res) => {
   }
 });
 
-app.use("/oauth", async (req, res) => {
+app.use('/oauth', async (req, res) => {
   // Use the client to get authorization Url
   // https://www.npmjs.com/package/@hubspot/api-client#obtain-your-authorization-url
-  console.log("Creating authorization Url");
+  console.log('Creating authorization Url');
   const authorizationUrl = hubspotClient.oauth.getAuthorizationUrl(
     CLIENT_ID,
     REDIRECT_URI,
     SCOPES
   );
-  console.log("Authorization Url", authorizationUrl);
+  console.log('Authorization Url', authorizationUrl);
 
   res.redirect(authorizationUrl);
 });
 
-app.use("/oauth-callback", async (req, res) => {
-  const code = _.get(req, "query.code");
+app.use('/oauth-callback', async (req, res) => {
+  const code = _.get(req, 'query.code');
 
   // Create OAuth 2.0 Access Token and Refresh Tokens
   // POST /oauth/v1/token
   // https://developers.hubspot.com/docs/api/working-with-oauth
-  console.log("Retrieving access token by code:", code);
+  console.log('Retrieving access token by code:', code);
   const getTokensResponse = await hubspotClient.oauth.defaultApi.createToken(
     GRANT_TYPES.AUTHORIZATION_CODE,
     code,
@@ -167,7 +167,7 @@ app.use("/oauth-callback", async (req, res) => {
     CLIENT_ID,
     CLIENT_SECRET
   );
-  logResponse("Retrieving access token result:", getTokensResponse);
+  logResponse('Retrieving access token result:', getTokensResponse);
 
   tokenStore = getTokensResponse.body;
   tokenStore.updatedAt = Date.now();
@@ -175,29 +175,29 @@ app.use("/oauth-callback", async (req, res) => {
   // Set token for the
   // https://www.npmjs.com/package/@hubspot/api-client
   hubspotClient.setAccessToken(tokenStore.accessToken);
-  res.redirect("/");
+  res.redirect('/');
 });
 
-app.get("/login", (req, res) => {
+app.get('/login', (req, res) => {
   tokenStore = {};
-  res.redirect("/");
+  res.redirect('/');
 });
 
-app.get("/refresh", async (req, res) => {
+app.get('/refresh', async (req, res) => {
   try {
     if (isAuthorized()) await refreshToken();
-    res.redirect("/");
+    res.redirect('/');
   } catch (e) {
     handleError(e, res);
   }
 });
 
-app.get("/error", (req, res) => {
-  res.render("error", { error: req.query.msg });
+app.get('/error', (req, res) => {
+  res.render('error', { error: req.query.msg });
 });
 
 app.use((error, req, res) => {
-  res.render("error", { error: error.message });
+  res.render('error', { error: error.message });
 });
 
 app.listen(PORT, () => console.log(`Listening on http://localhost:${PORT}`));

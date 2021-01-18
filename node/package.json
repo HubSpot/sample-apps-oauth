@@ -9,8 +9,8 @@
   "scripts": {
     "start": "src/index.js",
     "dev": "nodemon src/index.js",
-    "lint": "eslint . && prettier --list-different 'src/**/*.{js,json}'",
-    "prettier:write": "prettier --write 'src/**/*.{js,json}'",
+    "lint": "eslint . && prettier --list-different './**/*.{js,json}'",
+    "prettier:write": "prettier --write './**/*.{js,json}'",
     "test": "mocha src/test/test-oauth-app.js --timeout 60000 --exit"
   },
   "keywords": [

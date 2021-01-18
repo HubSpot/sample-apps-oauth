@@ -1,6 +1,6 @@
-const { By, until } = require("selenium-webdriver");
-const Promise = require("bluebird");
-const _ = require("lodash");
+const { By, until } = require('selenium-webdriver');
+const Promise = require('bluebird');
+const _ = require('lodash');
 
 module.exports = async (driver, contactsNames) => {
   const contacts = {};

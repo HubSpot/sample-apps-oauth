@@ -1,5 +1,5 @@
-const { By, until } = require("selenium-webdriver");
-const Promise = require("bluebird");
+const { By, until } = require('selenium-webdriver');
+const Promise = require('bluebird');
 
 module.exports = async (driver) => {
   const refreshAccessTokenLink = await driver.wait(

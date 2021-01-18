@@ -1,16 +1,16 @@
-const driverHelper = require("./driver-helper");
-const hubspotLoginFactory = require("../pages-factories/hubspot-login");
-const loginFactory = require("../pages-factories/login");
-const hubspotAccountsListFactory = require("../pages-factories/hubspot-accounts-list");
-const companiesListFactory = require("../pages-factories/contacts-list");
+const driverHelper = require('./driver-helper');
+const hubspotLoginFactory = require('../pages-factories/hubspot-login');
+const loginFactory = require('../pages-factories/login');
+const hubspotAccountsListFactory = require('../pages-factories/hubspot-accounts-list');
+const companiesListFactory = require('../pages-factories/contacts-list');
 
-const APPLICATION_TITLE = "HubSpot JavaScript Sample Oauth";
+const APPLICATION_TITLE = 'HubSpot JavaScript Sample Oauth';
 
 const verifyTitle = async (driver) => {
   const pageTitle = await driver.getTitle();
 
   if (APPLICATION_TITLE !== pageTitle) {
-    throw new Error("Sample Companies APP not started");
+    throw new Error('Sample Companies APP not started');
   }
 };
 

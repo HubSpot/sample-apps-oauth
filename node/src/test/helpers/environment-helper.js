@@ -1,6 +1,6 @@
-const hubspot = require("@hubspot/api-client");
-const _ = require("lodash");
-const Promise = require("bluebird");
+const hubspot = require('@hubspot/api-client');
+const _ = require('lodash');
+const Promise = require('bluebird');
 
 console.log('ENV', process.env.HUBSPOT_API_KEY);
 const hubspotClient = new hubspot.Client({
@@ -10,22 +10,22 @@ const hubspotClient = new hubspot.Client({
 const CONTACTS_TO_CREATE = [
   {
     properties: {
-      address: "test address 01",
-      email: "oauth.sample.test.01@hubspot.com",
-      city: "test city 01",
-      country: "test country 01",
-      firstname: "Contact created for test oauth-sample",
-      lastname: "01",
+      address: 'test address 01',
+      email: 'oauth.sample.test.01@hubspot.com',
+      city: 'test city 01',
+      country: 'test country 01',
+      firstname: 'Contact created for test oauth-sample',
+      lastname: '01',
     },
   },
   {
     properties: {
-      address: "test address 02",
-      email: "oauth.sample.test.02@hubspot.com",
-      city: "test city 02",
-      country: "test country 02",
-      firstname: "Contact created for test oauth-sample",
-      lastname: "02",
+      address: 'test address 02',
+      email: 'oauth.sample.test.02@hubspot.com',
+      city: 'test city 02',
+      country: 'test country 02',
+      firstname: 'Contact created for test oauth-sample',
+      lastname: '02',
     },
   },
 ];
@@ -49,7 +49,7 @@ const getContactsIdsCreatedForTests = async (query) => {
 };
 
 const restoreEnvironment = async () => {
-  console.log("Archiving contacts created for tests");
+  console.log('Archiving contacts created for tests');
   const contactsIdsToArchive = await getContactsIdsCreatedForTests(
     CONTACTS_TO_CREATE[0].properties.firstname
   );
@@ -61,7 +61,7 @@ const restoreEnvironment = async () => {
 exports.initializeEnvironment = async () => {
   await restoreEnvironment();
 
-  console.log("Creating contacts for tests");
+  console.log('Creating contacts for tests');
   await hubspotClient.crm.contacts.batchApi.create({
     inputs: CONTACTS_TO_CREATE,
   });
