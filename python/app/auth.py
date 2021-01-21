@@ -1,6 +1,6 @@
 from flask import redirect, url_for
 from functools import wraps
-from helpers.oauth import is_authorized
+from .helpers.oauth import is_authorized
 
 
 def auth_required(func):

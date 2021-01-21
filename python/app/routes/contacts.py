@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template
-from helpers.hubspot import create_client
-from auth import auth_required
+from ..helpers.hubspot import create_client
+from ..auth import auth_required
 
 
 module = Blueprint("contacts", __name__)
