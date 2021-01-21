@@ -1,6 +1,9 @@
-.github/
-node_modules/
-test-results.xml
 .env
 .env-test
-/test
+
+# Node
+node_modules/
+
+# Python
+*.egg-info
+__pycache__
