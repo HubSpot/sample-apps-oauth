@@ -25,3 +25,4 @@ Pick the language you are most comfortable in and follow the instructions in the
 # Supported languages
 
 * [JavaScript (Node)](node/README.md)
+* [Python](python/README.md)
