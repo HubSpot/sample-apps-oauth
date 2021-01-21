@@ -1,8 +1,8 @@
 from flask import Blueprint, render_template, redirect, request
 from hubspot.utils.oauth import get_auth_url
 import os
-from helpers.oauth import save_tokens, get_redirect_uri
-from helpers.hubspot import create_client
+from ..helpers.oauth import save_tokens, get_redirect_uri
+from ..helpers.hubspot import create_client
 
 module = Blueprint("oauth", __name__)
 
