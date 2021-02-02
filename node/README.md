@@ -5,8 +5,8 @@ An [Express server](http://expressjs.com/) implementation
 ### Requirements
 
 1. Node v10+
-2. Redirect url [configured](https://github.com/HubSpot/sample-apps-oauth/blob/main/README.md) to http://localhost:3000/oauth-callback
-3. [Configured](https://github.com/HubSpot/sample-apps-oauth/blob/main/README.md) .env file
+2. Redirect url [configured](https://github.com/HubSpot/sample-apps-oauth/blob/main/README.md#how-to-run-locally) to http://localhost:3000/oauth-callback
+3. [Configured](https://github.com/HubSpot/sample-apps-oauth/blob/main/README.md#how-to-run-locally) .env file
 
 ### Running
 
