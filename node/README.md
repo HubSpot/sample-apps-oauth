@@ -1,22 +1,25 @@
 # HubSpot-nodejs oauth sample app
 
-This is a sample app for the [hubspot-nodejs SDK](https://www.npmjs.com/package/@hubspot/api-client). 
-### Setup App
-Make sure you have [Node](https://nodejs.org/) >=10.13.0 installed.
+An [Express server](http://expressjs.com/) implementation
 
-### Configure
+### Requirements
 
-1. Copy .env.template to .env
-2. Paste your HubSpot Client Id and HubSpot Client Secret as the value for HUBSPOT_CLIENT_ID and HUBSPOT_CLIENT_SECRET in .env
+1. Node v10+
+2. Redirect url [configured](https://github.com/HubSpot/sample-apps-oauth/blob/main/README.md#how-to-run-locally) to http://localhost:3000/oauth-callback
+3. [Configured](https://github.com/HubSpot/sample-apps-oauth/blob/main/README.md#how-to-run-locally) .env file
 
-### Install
+### Running
+
+1. Install dependencies
+
 ```bash
 npm install
 ```
 
-### Running
+2. Run the application
 
 ```bash
 npm run dev
 ```
+
 You should now be able to navigate to [http://localhost:3000](http://localhost:3000) and use the application.
