@@ -1,4 +1,4 @@
-# HubSpot refresh token script
+# HubSpot refresh token JavaScripr script
 
 This is an example of script that will force refresh OAuth access tokens
 
@@ -9,9 +9,3 @@ This is an example of script that will force refresh OAuth access tokens
 
 ## How to run locally
 Be sure to substitute client id and client secret strings in the code with your application client id and client secret
- 
-## Supported languages
-
-* [JavaScript (Node)](node/refresh.js)
-* [Python](python/refresh.py)
-
