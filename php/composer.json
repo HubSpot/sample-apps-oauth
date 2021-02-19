@@ -1,0 +1,14 @@
+{
+    "minimum-stability": "dev",
+    "require": {
+        "hubspot/api-client": "2.8.1",
+        "ext-curl": "*",
+        "ext-json": "*",
+        "vlucas/phpdotenv": "^5.3@dev"
+    },
+    "autoload": {
+        "psr-4": {
+            "": "src/"
+        }
+    }
+}
