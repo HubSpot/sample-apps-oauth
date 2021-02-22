@@ -8,7 +8,7 @@ session_start();
 $uri = parse_url($_SERVER['REQUEST_URI'])['path'];
 
 try {
-    $dotenv = Dotenv\Dotenv::createImmutable('../');
+    $dotenv = Dotenv\Dotenv::createImmutable('../../');
     $dotenv->load();
 
     $publicRoutes = require '../routes/public.php';
