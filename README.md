@@ -34,6 +34,7 @@ npm run dev
 
 * [JavaScript (Node)](node/README.md)
 * [Python](python/README.md)
+* [Php](php/README.md)
 
 ## Note on application scopes
 HubSpot provides a way to restrict application users access to the system to certain scopes. In order to do that it is a good practice to make a set of scopes required by your application.
