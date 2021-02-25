@@ -6,6 +6,9 @@
         "ext-json": "*",
         "vlucas/phpdotenv": "^5.3@dev"
     },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "~2.12"
+    },
     "autoload": {
         "psr-4": {
             "": "src/"
