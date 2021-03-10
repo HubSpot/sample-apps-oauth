@@ -17,7 +17,9 @@ Please refer to [Initiate an Integration with OAuth 2.0](https://developers.hubs
 
 ### Setup App
 
-Make sure you have [Docker Compose](https://docs.docker.com/compose/) installed.
+Please, make sure that you have ruby 2.6.3 installed and run bunle in your app folder.
+
+```bundle install```
 
 ### Configure
 
@@ -26,8 +28,8 @@ Make sure you have [Docker Compose](https://docs.docker.com/compose/) installed.
 
 ### Running
 
-The best way to run this project (with the least configuration), is using docker compose.  Change to the webroot and start it
+Just run your rails app
 
-```bash docker-compose up --build web```
+```rails s```
 
 You should now be able to navigate to [http://localhost:3000](http://localhost:3000) and use the application.
