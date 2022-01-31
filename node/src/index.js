@@ -60,7 +60,7 @@ const getFullName = (contactProperties) => {
 };
 
 const refreshToken = async () => {
-  const result = await hubspotClient.oauth.defaultApi.createToken(
+  const result = await hubspotClient.oauth.tokensApi.createToken(
     GRANT_TYPES.REFRESH_TOKEN,
     undefined,
     undefined,
@@ -68,7 +68,7 @@ const refreshToken = async () => {
     CLIENT_SECRET,
     tokenStore.refreshToken
   );
-  tokenStore = result.body;
+  tokenStore = result;
   tokenStore.updatedAt = Date.now();
   console.log('Updated tokens', tokenStore);
 
@@ -132,7 +132,7 @@ app.get('/', async (req, res) => {
 
     res.render('contacts', {
       tokenStore,
-      contacts: prepareContactsContent(contactsResponse.body.results),
+      contacts: prepareContactsContent(contactsResponse.results),
     });
   } catch (e) {
     handleError(e, res);
@@ -160,7 +160,7 @@ app.use('/oauth-callback', async (req, res) => {
   // POST /oauth/v1/token
   // https://developers.hubspot.com/docs/api/working-with-oauth
   console.log('Retrieving access token by code:', code);
-  const getTokensResponse = await hubspotClient.oauth.defaultApi.createToken(
+  const getTokensResponse = await hubspotClient.oauth.tokensApi.createToken(
     GRANT_TYPES.AUTHORIZATION_CODE,
     code,
     REDIRECT_URI,
@@ -169,7 +169,7 @@ app.use('/oauth-callback', async (req, res) => {
   );
   logResponse('Retrieving access token result:', getTokensResponse);
 
-  tokenStore = getTokensResponse.body;
+  tokenStore = getTokensResponse;
   tokenStore.updatedAt = Date.now();
 
   // Set token for the
