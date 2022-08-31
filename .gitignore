@@ -10,3 +10,4 @@ __pycache__
 
 #Php
 vendor/
+.php-cs-fixer.cache

@@ -3,7 +3,6 @@
 use Helpers\OAuth2Helper;
 
 include_once '../../vendor/autoload.php';
-
 session_start();
 $uri = parse_url($_SERVER['REQUEST_URI'])['path'];
 
@@ -23,13 +22,13 @@ try {
     if ('/' === $uri) {
         header('Location: /contacts/list');
 
-        exit();
+        exit;
     }
 
     if (!in_array($uri, array_merge($publicRoutes, $protectedRoutes))) {
         http_response_code(404);
 
-        exit();
+        exit;
     }
 
     $path = __DIR__.'/../actions'.$uri.'.php';
@@ -40,5 +39,5 @@ try {
 
     include __DIR__.'/../views/error.php';
 
-    exit();
+    exit;
 }
