@@ -9,7 +9,7 @@ const PORT = 3000;
 const OBJECTS_LIMIT = 30;
 const CLIENT_ID = process.env.HUBSPOT_CLIENT_ID;
 const CLIENT_SECRET = process.env.HUBSPOT_CLIENT_SECRET;
-const SCOPES = 'contacts';
+const SCOPES = 'crm.objects.contacts.read';
 const REDIRECT_URI = `http://localhost:${PORT}/oauth-callback`;
 const GRANT_TYPES = {
   AUTHORIZATION_CODE: 'authorization_code',
