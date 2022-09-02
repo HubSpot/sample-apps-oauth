@@ -2,7 +2,7 @@
 
 ### Setup App
 
-Make sure you have [Php 7.0+](https://www.php.net/downloads) and [Composer](https://getcomposer.org) installed.
+Make sure you have [Php 7.3+](https://www.php.net/downloads) and [Composer](https://getcomposer.org) installed.
 
 ### Configure
 
