@@ -2,7 +2,8 @@
 
 ### Setup App
 
-Make sure you have [Python 3.8+](https://www.python.org/downloads/) installed.
+Make sure you have [Python 3.8+](https://www.python.org/downloads/) installed.\
+Before using this app you should read [Documentation](https://developers.hubspot.com/docs/api/working-with-oauth)
 
 ### Configure
 
