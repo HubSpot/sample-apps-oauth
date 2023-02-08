@@ -23,7 +23,7 @@ def is_authorized():
 
 
 def get_redirect_uri():
-    return request.url_root + "oauth/callback"
+    return request.host_url + "oauth/callback"
 
 
 def refresh_and_get_access_token():
