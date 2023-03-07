@@ -1,24 +1,25 @@
+require 'hubspot-api-client'
+
 class ContactsController < ApplicationController
   before_action :authorize
-
   def index
     # https://developers.hubspot.com/docs/methods/contacts/get_contacts
     @contacts = if params[:search].present?
       @search_q = params[:search]
-      Services::Hubspot::Contacts::Search.new(email: @search_q).call
+      Services::Hubspot::Contacts::Search.new(session[:tokens][:access_token], email: @search_q).call
     else
       # https://developers.hubspot.com/docs/methods/contacts/get_contacts
-      Services::Hubspot::Contacts::GetPage.new(limit: 100).call.sort_by(&:created_at).reverse
+      Services::Hubspot::Contacts::GetPage.new(limit: 100, access_token: session[:tokens][:access_token]).call.sort_by(&:created_at).reverse
     end
   end
 
   def show
-    @contact = Services::Hubspot::Contacts::GetById.new(params[:id]).call
-    @owners = Services::Hubspot::Owners::GetAll.new.call
+    @contact = Services::Hubspot::Contacts::GetById.new(params[:id], session[:tokens][:access_token]).call
+    @owners = Services::Hubspot::Owners::GetAll.new(session[:tokens][:access_token]).call
   end
 
   def create
-    Services::Hubspot::Contacts::Create.new(email: params[:email]).call
+    Services::Hubspot::Contacts::Create.new(session[:tokens][:access_token],  email: params[:email]).call
     redirect_to :contacts
   rescue Hubspot::Crm::Contacts::ApiError => e
     error_message = JSON.parse(e.response_body)['message']
@@ -26,8 +27,8 @@ class ContactsController < ApplicationController
   end
 
   def update
-    @contact = Services::Hubspot::Contacts::GetById.new(params[:id]).call
-    Services::Hubspot::Contacts::Update.new(params[:id], contact_params).call
+    @contact = Services::Hubspot::Contacts::GetById.new(params[:id], session[:tokens][:access_token]).call
+    Services::Hubspot::Contacts::Update.new(session[:tokens][:access_token], params[:id], contact_params).call
     redirect_to :contacts
   rescue Hubspot::Crm::Contacts::ApiError => e
     error_message = JSON.parse(e.response_body)['message']
@@ -39,7 +40,7 @@ class ContactsController < ApplicationController
       format.html
       format.csv do
         send_data(
-          Services::Hubspot::Contacts::Export.new.call,
+          Services::Hubspot::Contacts::Export.new(session[:tokens][:access_token]).call,
           filename: "contacts-#{Date.today}.csv"
         )
       end
@@ -47,8 +48,8 @@ class ContactsController < ApplicationController
   end
 
   def destroy
-    @contact = Services::Hubspot::Contacts::GetById.new(params[:id]).call
-    Services::Hubspot::Contacts::Destroy.new(params[:id]).call
+    @contact = Services::Hubspot::Contacts::GetById.new(params[:id], session[:tokens][:access_token]).call
+    Services::Hubspot::Contacts::Destroy.new(params[:id], session[:tokens][:access_token]).call
     redirect_back(fallback_location: root_path, notice: "Contact ##{@contact.id} was successfully destroyed.")
   end
 

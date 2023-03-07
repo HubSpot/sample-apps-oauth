@@ -1,3 +1,5 @@
+require 'hubspot/oauth_helper'
+
 module Services
   module Authorization
     class GetAuthorizationUri
@@ -13,7 +15,8 @@ module Services
         ::Hubspot::OAuthHelper.authorize_url(
           client_id: ENV['HUBSPOT_CLIENT_ID'],
           redirect_uri: redirect_uri,
-          scope: %w[contacts]
+          # your registered scopes in the app
+          scope: %[crm.objects.contacts.read crm.objects.contacts.write]
         )
       end
 
