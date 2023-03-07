@@ -2,13 +2,14 @@ module Services
   module Hubspot
     module Contacts
       class Search
-        def initialize(email:)
+        def initialize(access_token, email:)
+          @access_token = access_token
           @email = email
         end
 
         def call
-          search_api = ::Hubspot::Crm::Contacts::SearchApi.new
-          results = search_api.do_search(search_request, auth_names: 'oauth2').results
+          basic_api = ::Hubspot::Client.new(access_token: @access_token)
+          results = basic_api.crm.contacts.search_api.do_search(body: search_request).results
           results = add_fullnames(results)
           results
         end
@@ -16,13 +17,21 @@ module Services
         private
 
         def search_request
-          filter = ::Hubspot::Crm::Contacts::Filter.new(
-            property_name: 'email',
-            operator: 'EQ',
-            value: @email
-          )
-          filter_group = ::Hubspot::Crm::Contacts::FilterGroup.new(filters: [filter])
-          ::Hubspot::Crm::Contacts::PublicObjectSearchRequest.new(filter_groups: [filter_group])
+            {
+              filterGroups:
+                [
+                  {
+                    "filters":
+                      [
+                        {
+                          propertyName: 'email',
+                          operator: 'EQ',
+                          value: @email
+                        }
+                     ]
+                  }
+               ]
+            }
         end
 
         def add_fullnames(contacts)

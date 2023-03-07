@@ -1,14 +1,14 @@
+require 'hubspot/client'
+
 module Services
   module Authorization
     class AuthorizeHubspot
       def initialize(tokens:)
-        @tokens = tokens
+        @tokens = tokens.to_hash
       end
 
       def call
-        ::Hubspot.configure do |config|
-          config.access_token = @tokens[:access_token]
-        end
+       ::Hubspot::Client.new(access_token: @tokens[:access_token])
       end
     end
   end

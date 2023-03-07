@@ -2,19 +2,20 @@ module Services
   module Hubspot
     module Contacts
       class Create
-        def initialize(properties)
+        def initialize(access_token, properties)
+          @access_token = access_token
           @properties = properties
         end
 
         def call
-          create_api = ::Hubspot::Crm::Contacts::BasicApi.new
-          create_api.create(contact_input, auth_names: 'oauth2')
+          basic_api = ::Hubspot::Client.new(access_token: @access_token)
+          basic_api.crm.contacts.basic_api.create(contact_input)
         end
 
         private
 
         def contact_input
-          @contact_input ||= ::Hubspot::Crm::Contacts::SimplePublicObjectInput.new(properties: @properties)
+          @contact_input ||= { body:{ properties: @properties } }
         end
       end
     end

@@ -4,7 +4,8 @@ module Services
       class Export
         PROPERTIES_TO_EXPORT = %w[email firstname lastname].freeze
 
-        def initialize(max_pages: 10)
+        def initialize(access_token, max_pages: 10)
+          @access_token = access_token
           @max_pages = max_pages
         end
 
@@ -15,8 +16,8 @@ module Services
         private
 
         def contacts
-          basic_api = ::Hubspot::Crm::Contacts::BasicApi.new
-          basic_api.get_all(auth_names: 'oauth2')
+          basic_api = ::Hubspot::Client.new(access_token: @access_token)
+          basic_api.crm.contacts.basic_api.get_all()
         end
 
         def convert_to_csv(contacts, properties: PROPERTIES_TO_EXPORT)

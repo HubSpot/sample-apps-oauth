@@ -2,15 +2,15 @@ module Services
   module Hubspot
     module Contacts
       class GetById
-        def initialize(id)
+        def initialize(id, access_token)
           @id = id
+          @access_token = access_token
         end
 
         def call
-          basic_api = ::Hubspot::Crm::Contacts::BasicApi.new
-          basic_api.get_by_id(
-            @id,
-            auth_names: 'oauth2',
+          basic_api = ::Hubspot::Client.new(access_token: @access_token)
+          basic_api.crm.contacts.basic_api.get_by_id(
+            contact_id: @id,
             properties: %w[email firstname lastname hubspot_owner_id]
           )
         end
