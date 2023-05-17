@@ -31,7 +31,7 @@ def refresh_and_get_access_token():
         raise Exception("No refresh token is specified")
     tokens = session[TOKENS_KEY]
     if time.time() > tokens["expires_at"]:
-        tokens = HubSpot().auth.oauth.tokens_api.create_token(
+        tokens = HubSpot().auth.oauth.tokens_api.create(
             grant_type="refresh_token",
             redirect_uri=get_redirect_uri(),
             refresh_token=tokens["refresh_token"],
