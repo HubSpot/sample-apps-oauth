@@ -11,7 +11,7 @@ module Services
 
         def call
           default_api = ::Hubspot::Client.new(api_key: ENV['HUBSPOT_CLIENT_SECRET'])
-          tokens = default_api.o_auth.tokens_api.create_token(
+          tokens = default_api.o_auth.tokens_api.create(
             grant_type: "authorization_code",
             code: @code,
             redirect_uri: redirect_uri,

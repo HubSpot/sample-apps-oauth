@@ -18,7 +18,7 @@ module Services
 
         def refresh_tokens
           default_api = ::Hubspot::Client.new(api_key: ENV['HUBSPOT_CLIENT_SECRET'])
-          tokens = default_api.o_auth.tokens_api.create_token(
+          tokens = default_api.o_auth.tokens_api.create(
             grant_type: "refresh_token",
             refresh_token: @tokens[:refresh_token],
             redirect_uri: redirect_uri,
