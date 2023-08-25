@@ -60,7 +60,7 @@ const getFullName = (contactProperties) => {
 };
 
 const refreshToken = async () => {
-  const result = await hubspotClient.oauth.tokensApi.createToken(
+  const result = await hubspotClient.oauth.tokensApi.create(
     GRANT_TYPES.REFRESH_TOKEN,
     undefined,
     undefined,
@@ -160,7 +160,7 @@ app.use('/oauth-callback', async (req, res) => {
   // POST /oauth/v1/token
   // https://developers.hubspot.com/docs/api/working-with-oauth
   console.log('Retrieving access token by code:', code);
-  const getTokensResponse = await hubspotClient.oauth.tokensApi.createToken(
+  const getTokensResponse = await hubspotClient.oauth.tokensApi.create(
     GRANT_TYPES.AUTHORIZATION_CODE,
     code,
     REDIRECT_URI,
