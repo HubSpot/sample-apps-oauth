@@ -114,7 +114,7 @@ app.use(checkEnv);
 
 app.get('/', async (req, res) => {
   try {
-    if (!isAuthorized()) return res.render('login');
+    if (!isAuthorized()) return res.redirect('/login');
     if (isTokenExpired()) await refreshToken();
 
     const properties = ['firstname', 'lastname', 'company'];
@@ -180,7 +180,7 @@ app.use('/oauth-callback', async (req, res) => {
 
 app.get('/login', (req, res) => {
   tokenStore = {};
-  res.redirect('/');
+  res.render('login', {redirectUri: REDIRECT_URI})
 });
 
 app.get('/refresh', async (req, res) => {
