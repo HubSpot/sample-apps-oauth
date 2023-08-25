@@ -17,10 +17,10 @@ module.exports = {
 
   overrides: [
     {
-      files: ['**/test/*.js'],
+      files: ['**/src/public/js/*.js'],
       env: {
-        mocha: true,
-        node: true,
+        browser: true,
+        node: false,
       },
     },
   ],

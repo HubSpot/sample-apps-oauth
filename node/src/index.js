@@ -180,7 +180,7 @@ app.use('/oauth-callback', async (req, res) => {
 
 app.get('/login', (req, res) => {
   tokenStore = {};
-  res.render('login', {redirectUri: REDIRECT_URI})
+  res.render('login', { redirectUri: REDIRECT_URI });
 });
 
 app.get('/refresh', async (req, res) => {

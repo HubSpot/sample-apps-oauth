@@ -30,9 +30,9 @@
     "pug": "^3.0.2"
   },
   "devDependencies": {
-    "eslint": "^7.32.0",
-    "nodemon": "^2.0.19",
-    "prettier": "^2.2.1"
+    "eslint": "^8.47.0",
+    "nodemon": "^3.0.1",
+    "prettier": "^3.0.2"
   },
   "repository": {
     "type": "git",
