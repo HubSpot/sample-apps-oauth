@@ -65,7 +65,7 @@ class OAuth2Helper
         $tokens = $_SESSION[static::SESSION_TOKENS_KEY];
 
         if (time() > $tokens['expires_at']) {
-            $tokens = Factory::create()->auth()->oAuth()->tokensApi()->createToken(
+            $tokens = Factory::create()->auth()->oAuth()->tokensApi()->create(
                 'refresh_token',
                 null,
                 static::getRedirectUri(),
