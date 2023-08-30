@@ -4,7 +4,7 @@ use Helpers\OAuth2Helper;
 use HubSpot\Factory;
 
 // https://developers.hubspot.com/docs-beta/working-with-oauth
-$tokens = Factory::create()->auth()->oAuth()->tokensApi()->createToken(
+$tokens = Factory::create()->auth()->oAuth()->tokensApi()->create(
     'authorization_code',
     $_GET['code'],
     OAuth2Helper::getRedirectUri(),
