@@ -21,5 +21,5 @@ $authUrl = HubSpot\Utils\OAuth2::getAuthUrl(
     ['Scopes']
 );
 </pre>
-<script type="text/javascript" src="/js/login.js?<?php echo filemtime('./css/main.css'); ?>"></script>
+<script type="text/javascript" src="/js/login.js?<?php echo filemtime('./js/login.js'); ?>"></script>
 <?php include __DIR__.'/../_partials/footer.php'; ?>
