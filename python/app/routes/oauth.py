@@ -15,7 +15,7 @@ def login():
 @module.route("/authorize")
 def authorize():
     auth_url = get_auth_url(
-        scopes=("crm.objects.contacts.read",),
+        scope=("crm.objects.contacts.read",),
         client_id=os.environ.get("HUBSPOT_CLIENT_ID"),
         redirect_uri=get_redirect_uri(),
     )
