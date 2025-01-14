@@ -2,7 +2,7 @@
 
 namespace Helpers;
 
-use HubSpot\Client\Auth\OAuth\Model\TokenResponseIF;
+use HubSpot\Client\Oauth\Model\TokenResponseIF;
 use HubSpot\Factory;
 
 class OAuth2Helper
