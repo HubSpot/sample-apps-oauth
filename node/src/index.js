@@ -60,12 +60,16 @@ const getFullName = (contactProperties) => {
 };
 
 const refreshToken = async () => {
-  const result = await hubspotClient.oauth.tokensApi.create(
-    GRANT_TYPES.REFRESH_TOKEN,
+  const result = await hubspotClient.oauth.v3.advancedApi.getToken(
+    undefined,
     undefined,
     undefined,
     CLIENT_ID,
     CLIENT_SECRET,
+    undefined,
+    undefined,
+    GRANT_TYPES.REFRESH_TOKEN,
+    undefined,
     tokenStore.refreshToken
   );
   tokenStore = result;
@@ -160,12 +164,16 @@ app.use('/oauth-callback', async (req, res) => {
   // POST /oauth/v1/token
   // https://developers.hubspot.com/docs/api/working-with-oauth
   console.log('Retrieving access token by code:', code);
-  const getTokensResponse = await hubspotClient.oauth.tokensApi.create(
-    GRANT_TYPES.AUTHORIZATION_CODE,
-    code,
-    REDIRECT_URI,
+  const getTokensResponse = await hubspotClient.oauth.v3.advancedApi.getToken(
+    undefined,
+    undefined,
+    undefined,
     CLIENT_ID,
-    CLIENT_SECRET
+    CLIENT_SECRET,
+    code,
+    undefined,
+    GRANT_TYPES.AUTHORIZATION_CODE,
+    REDIRECT_URI
   );
   logResponse('Retrieving access token result:', getTokensResponse);
 
