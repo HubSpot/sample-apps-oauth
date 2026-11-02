@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "35118424d8b8822d262cff9b0a810282",
+    "content-hash": "09e4922925f8d7f16f0b612bcfd21c16",
     "packages": [
         {
             "name": "graham-campbell/result-type",
@@ -395,30 +395,30 @@
         },
         {
             "name": "hubspot/api-client",
-            "version": "12.0.0",
+            "version": "15.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/HubSpot/hubspot-api-php.git",
-                "reference": "6659a2f85b5d2a01c890a5e5ce840c09e220c5e3"
+                "reference": "bf2a661f3843ae86f4972a17202d369d971061f7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/HubSpot/hubspot-api-php/zipball/6659a2f85b5d2a01c890a5e5ce840c09e220c5e3",
-                "reference": "6659a2f85b5d2a01c890a5e5ce840c09e220c5e3",
+                "url": "https://api.github.com/repos/HubSpot/hubspot-api-php/zipball/bf2a661f3843ae86f4972a17202d369d971061f7",
+                "reference": "bf2a661f3843ae86f4972a17202d369d971061f7",
                 "shasum": ""
             },
             "require": {
                 "ext-curl": "*",
                 "ext-json": "*",
                 "ext-mbstring": "*",
-                "guzzlehttp/guzzle": "^7.3",
-                "guzzlehttp/psr7": "^1.7 || ^2.0",
-                "php": ">=7.4"
+                "guzzlehttp/guzzle": "^7.3 || ^8.0",
+                "guzzlehttp/psr7": "^1.7 || ^2.0 || ^3.0",
+                "php": ">=8.1"
             },
             "require-dev": {
-                "friendsofphp/php-cs-fixer": "^3.4",
-                "phpspec/phpspec": "^7.1",
-                "phpunit/phpunit": "^9.5"
+                "friendsofphp/php-cs-fixer": "^3.94",
+                "phpspec/phpspec": "^8.2",
+                "phpunit/phpunit": "^11.5"
             },
             "type": "library",
             "autoload": {
@@ -449,9 +449,9 @@
             ],
             "support": {
                 "issues": "https://github.com/HubSpot/hubspot-api-php/issues",
-                "source": "https://github.com/HubSpot/hubspot-api-php/tree/12.0.0"
+                "source": "https://github.com/HubSpot/hubspot-api-php/tree/15.1.0"
             },
-            "time": "2024-10-28T06:58:59+00:00"
+            "time": "2026-10-30T14:40:31+00:00"
         },
         {
             "name": "phpoption/phpoption",
@@ -3348,13 +3348,13 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {},
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
         "ext-curl": "*",
         "ext-json": "*"
     },
-    "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "platform-dev": {},
+    "plugin-api-version": "2.6.0"
 }
